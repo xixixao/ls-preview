@@ -2,8 +2,18 @@
 name = "ls-preview"
 version = "0.1.0"
 edition = "2021"
+description = "Show a preview of the directory contents."
+license = "MIT"
+repository = "https://github.com/xixixao/ls-preview"
+homepage = "https://github.com/xixixao/ls-preview"
+documentation = "https://docs.rs/ls-preview"
+
+[[bin]]
+name = "ls-preview"
+path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
 console = "0.15.11"
 libc = "0.2.172"
+
