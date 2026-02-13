@@ -1,0 +1,6 @@
+{
+  "styles": {
+    "theme": "axodark",
+    "additional_css": ["./oranda.css"]
+  }
+}
