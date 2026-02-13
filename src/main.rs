@@ -7,6 +7,7 @@ use std::os::fd::AsRawFd;
 use std::os::unix::fs::FileTypeExt;
 use std::time::Instant;
 
+
 #[derive(Parser)]
 #[command(author, version, about = "Show a preview of the directory contents.")]
 struct Args {
@@ -112,11 +113,10 @@ fn print_entries_in_columns(
 ) -> io::Result<()> {
     // Find the maximum width needed
     let max_width = entries.iter().map(|(_, _, width)| *width).max().unwrap();
-
-    // Round up to next multiple of 8
-    let column_width = (((max_width - 1) / 8) + 1) * 8;
-
-    let num_columns = std::cmp::max(1, terminal_width.map(|w| w / column_width).unwrap_or(0));
+    
+    let num_columns = std::cmp::max(1, terminal_width.map(|w| w / (max_width + 2)).unwrap_or(0));
+    // Doesn't matter if we don't know terminal_width
+    let column_width = terminal_width.map(|w| w / num_columns).unwrap_or(0);
 
     if consider_dirs_only {
         let max_items = (num_columns as usize) * max_lines;
