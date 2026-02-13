@@ -1,4 +1,7 @@
 {
+  "build": {
+    "path_prefix": "ls-preview"
+  },
   "styles": {
     "theme": "axodark",
     "additional_css": ["./oranda.css"]
