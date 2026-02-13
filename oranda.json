@@ -2,6 +2,15 @@
   "build": {
     "path_prefix": "ls-preview"
   },
+  "components": {
+    "artifacts": {
+      "package_managers": {
+        "preferred": {
+          "binstall": "cargo binstall ls-preview"
+        }
+      }
+    }
+  },
   "styles": {
     "theme": "axodark",
     "additional_css": ["./oranda.css"]
