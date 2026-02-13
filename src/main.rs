@@ -121,15 +121,15 @@ fn print_entries_in_columns(
     if consider_dirs_only {
         let max_items = (num_columns as usize) * max_lines;
         if entries.len() > max_items {
-            return print_entries_in_columns(
-                entries
-                    .into_iter()
-                    .filter(|(_, meta, _)| meta.is_dir())
-                    .collect(),
-                terminal_width,
-                max_lines,
-                false,
-            );
+            let is_dir = |(_, meta, _): &(_, &std::fs::FileType, _)| meta.is_dir();
+            if entries.iter().any(is_dir) {
+                return print_entries_in_columns(
+                    entries.into_iter().filter(is_dir).collect(),
+                    terminal_width,
+                    max_lines,
+                    false
+                );
+            }
         }
     }
 
