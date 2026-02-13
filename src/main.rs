@@ -1,6 +1,5 @@
 use clap::Parser;
 use console::{set_colors_enabled, Style};
-use libc;
 use std::fs;
 use std::io;
 use std::os::fd::AsRawFd;
@@ -133,7 +132,7 @@ fn print_entries_in_columns(
         }
     }
 
-    entries.sort_by(|a, b| a.0.cmp(&b.0));
+    entries.sort_by(|a, b| a.0.cmp(b.0));
 
     // Print entries in columns
     for (i, (name, file_type, width)) in entries.iter().enumerate() {
@@ -160,6 +159,7 @@ fn print_entries_in_columns(
     Ok(())
 }
 
+#[allow(clippy::if_same_then_else)]
 fn get_color_and_indicator(file_type: &fs::FileType) -> (Style, &'static str) {
     if file_type.is_dir() {
         (Style::new().blue().bold(), "/")
